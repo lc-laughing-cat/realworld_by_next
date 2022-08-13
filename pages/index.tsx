@@ -30,33 +30,39 @@ const Home: NextPage = () => {
 
         <div>
           <div>
-            <ul>
-              <li>Global Feed</li>
-            </ul>
-          </div>
-          <div className={styles.articlePreview}>
             <div>
-              <div className={styles.articleUser}>
+              <ul>
+                <li>Global Feed</li>
+              </ul>
+            </div>
+            <div className={styles.articlePreview}>
+              <div>
+                <div className={styles.articleUser}>
+                  <Link href="/">
+                    <a>
+                      <Image alt="" src=""></Image>
+                    </a>
+                  </Link>
+                  <div>name</div>
+                  <div>date</div>
+                </div>
+                <div>いいね</div>
+              </div>
+              <div className={styles.articleContent}>
                 <Link href="/">
                   <a>
-                    <Image alt="" src=""></Image>
+                    <h1 className={styles.articleTitle}>Title</h1>
+                    <p>article content</p>
+                    <span>Read more...</span>
                   </a>
                 </Link>
-                <div>name</div>
-                <div>date</div>
+                <Link href="/">tag</Link>
               </div>
-              <div>いいね</div>
             </div>
-            <div className={styles.articleContent}>
-              <Link href="/">
-                <a>
-                  <h1 className={styles.articleTitle}>Title</h1>
-                  <p>article content</p>
-                  <span>Read more...</span>
-                </a>
-              </Link>
-              <Link href="/">tag</Link>
-            </div>
+          </div>
+          <div className={styles.tags}>
+            <p>Popular tags</p>
+            <div>tags</div>
           </div>
         </div>
       </main>
