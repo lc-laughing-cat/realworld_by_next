@@ -1,10 +1,8 @@
 .container {
-  padding: 0 2rem;
 }
 
 .main {
   min-height: 100vh;
-  padding: 4rem 0;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -57,7 +55,6 @@
 }
 
 .code {
-  background: #fafafa;
   border-radius: 5px;
   padding: 0.75rem;
   font-size: 1.1rem;
@@ -106,6 +103,28 @@
 .logo {
   height: 1em;
   margin-left: 0.5rem;
+}
+
+.navbar {
+  display: flex;
+  width: 100%;
+  padding: 0.5rem 8rem;
+}
+
+.headerTitle {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #5CB85C;
+}
+
+.navMenus {
+  display: flex;
+  margin-left: auto;
+  align-items: center;
+}
+
+.navMenu {
+  margin-right: 1.5rem;
 }
 
 @media (max-width: 600px) {
