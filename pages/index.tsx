@@ -15,10 +15,10 @@ const Home: NextPage = () => {
 
       <main className={styles.main}>
         <div className={styles.navbar}>
-          <div>conduit</div>
-          <div>
-            <div>Home</div>
-            <div>Sign in</div>
+          <div className={styles.headerTitle}>conduit</div>
+          <div className={styles.navMenus}>
+            <div className={styles.navMenu}>Home</div>
+            <div className={styles.navMenu}>Sign in</div>
             <div>Sing up</div>
           </div>
         </div>
