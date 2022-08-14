@@ -23,9 +23,9 @@ const Home: NextPage = () => {
           </div>
         </div>
 
-        <div className={styles.title}>
-          <p>conduit</p>
-          <p>A place to share your knowledge.</p>
+        <div className={styles.banner}>
+          <p className={styles.bannerTitle}>conduit</p>
+          <p className={styles.bannerSentence}>A place to share your knowledge.</p>
         </div>
 
         <div>
