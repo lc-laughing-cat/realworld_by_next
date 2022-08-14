@@ -68,18 +68,18 @@ const Home: NextPage = () => {
       </main>
 
       <footer className={styles.footer}>
-        <div>
+        <div className={styles.footerContainer}>
           <Link href="/">
-            <a>conduit</a>
+            <a className={styles.footerTitle}>conduit</a>
           </Link>
+          <span>
+            An interactive learning project from
+            <Link href="https://thinkster.io">
+              <a>Thinkster</a>
+            </Link>
+            . Code & design licensed under MIT.
+          </span>
         </div>
-        <span>
-          An interactive learning project from
-          <Link href="https://thinkster.io">
-            <a>Thinkster</a>
-          </Link>
-          . Code & design licensed under MIT.
-        </span>
       </footer>
     </div>
   );
