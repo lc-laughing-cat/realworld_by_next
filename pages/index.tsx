@@ -6,7 +6,7 @@ import styles from "../styles/Home.module.css";
 
 const Home: NextPage = () => {
   return (
-    <div className={styles.container}>
+    <div className="">
       <Head>
         <title>HOME | REALWORLD BY NEXT</title>
         <meta name="description" content="realworld by next" />
@@ -28,8 +28,8 @@ const Home: NextPage = () => {
           <p className={styles.bannerSentence}>A place to share your knowledge.</p>
         </div>
 
-        <div>
-          <div>
+        <div className={styles.container}>
+          <div className={styles.containerArticles}>
             <div>
               <ul>
                 <li>Global Feed</li>
@@ -60,9 +60,13 @@ const Home: NextPage = () => {
               </div>
             </div>
           </div>
-          <div className={styles.tags}>
-            <p>Popular tags</p>
-            <div>tags</div>
+          <div className={styles.containerTags}>
+            <div className={styles.tagsContent}>
+              <p>Popular Tags</p>
+              <Link href="/">
+                <a>tags</a>
+              </Link>
+            </div>
           </div>
         </div>
       </main>
