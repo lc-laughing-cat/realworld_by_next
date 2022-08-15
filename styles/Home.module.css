@@ -173,10 +173,74 @@
 
 .containerArticles {
   width: 75%;
+  padding: 0 1rem;
+}
+
+.containerArticles ul {
+  margin-bottom: 0;
+  padding-left: 0;
+}
+
+.containerArticles li {
+  color: #5CB85C;
+  border-bottom: 2px solid #5CB85C;
+  margin-bottom: -1px;
+  padding-bottom: 0.5rem;
+  max-width: 8rem;
+  text-align: center;
+}
+
+.articlePreview {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 1rem 0;
+}
+
+.articleInfo {
+  display: flex;
+  margin-bottom: 1rem;
+}
+
+.articleUser {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.articleUser a {
+  height: 32px;
+}
+
+.userName {
+  display: block; 
+  margin-left: 0.5rem;
+  font-size: 0.8rem;
+}
+
+.articleLike {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+}
+
+.articleTitle {
+  margin-bottom: 3px;
+}
+
+.articleContent p {
+  font-size: 0.8rem;
+  opacity: 0.3;
+  margin-bottom: 1rem;
+}
+
+.articleContent span {
+  font-size: 0.6rem;
+  opacity: 0.3;
 }
 
 .containerTags {
   width: 25%;
+  padding: 0 1rem;
 }
 
 .tagsContent {
