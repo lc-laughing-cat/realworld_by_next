@@ -28,7 +28,7 @@ const Home: NextPage = () => {
 
   const { articles } = artData;
 
-  console.log("data", articles);
+  console.log("data", tags);
 
   return (
     <div className="">
@@ -56,40 +56,49 @@ const Home: NextPage = () => {
         <div className={styles.container}>
           <div className={styles.containerArticles}>
             <div>
-              <ul>
-                <li>Global Feed</li>
+              <ul className={styles.containerFeeds}>
+                <li className={styles.containerFeed}>Global Feed</li>
               </ul>
             </div>
-            <div>
-              {articles?.map((article) => {
-                console.log("slug", article.slug);
-              })}
-            </div>
 
-            <div className={styles.articlePreview}>
-              <div className={styles.articleInfo}>
-                <div className={styles.articleUser}>
-                  <Link href="/">
-                    <a>
-                      <Image alt="" src="/favicon.ico" width="32pxm" height="32px"></Image>
-                    </a>
-                  </Link>
-                  <div className={styles.userName}>
-                    <div>name</div>
-                    <div>date</div>
+            <div>
+              {articles?.map((article: any) => (
+                <div key={article.slug} className={styles.articlePreview}>
+                  <div className={styles.articleInfo}>
+                    <div className={styles.articleUser}>
+                      <Link href="/">
+                        <a>
+                          <Image
+                            alt=""
+                            src={article.author.image || "/favicon.ico"}
+                            width="32pxm"
+                            height="32px"
+                          ></Image>
+                        </a>
+                      </Link>
+                      <div className={styles.articleUserName}>
+                        <div className={styles.userName}>{article.author.username}</div>
+                        <div>{new Date(article.updatedAt).toDateString()}</div>
+                      </div>
+                    </div>
+                    <div className={styles.articleLike}>いいね{article.favoritesCount}</div>
+                  </div>
+                  <div className={styles.articleContent}>
+                    <Link href="/">
+                      <a>
+                        <h3 className={styles.articleTitle}>{article.title}</h3>
+                        <p>{article.description}</p>
+                        <span>Read more...</span>
+                        <ul>
+                          {article.tagList?.map((tag: string, index: number) => (
+                            <li key={index}>{tag}</li>
+                          ))}
+                        </ul>
+                      </a>
+                    </Link>
                   </div>
                 </div>
-                <div className={styles.articleLike}>いいね</div>
-              </div>
-              <div className={styles.articleContent}>
-                <Link href="/">
-                  <a>
-                    <h3 className={styles.articleTitle}>Create a new implementation</h3>
-                    <p>join the community by creating a new implementation</p>
-                    <span>Read more...</span>
-                  </a>
-                </Link>
-              </div>
+              ))}
             </div>
           </div>
           <div className={styles.containerTags}>
@@ -105,22 +114,21 @@ const Home: NextPage = () => {
             </div>
           </div>
         </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <div className={styles.footerContainer}>
-          <Link href="/">
-            <a className={styles.footerTitle}>conduit</a>
-          </Link>
-          <span>
-            An interactive learning project from
-            <Link href="https://thinkster.io">
-              <a>Thinkster</a>
+        <footer className={styles.footer}>
+          <div className={styles.footerContainer}>
+            <Link href="/">
+              <a className={styles.footerTitle}>conduit</a>
             </Link>
-            . Code & design licensed under MIT.
-          </span>
-        </div>
-      </footer>
+            <span>
+              An interactive learning project from
+              <Link href="https://thinkster.io">
+                <a>Thinkster</a>
+              </Link>
+              . Code & design licensed under MIT.
+            </span>
+          </div>
+        </footer>
+      </main>
     </div>
   );
 };

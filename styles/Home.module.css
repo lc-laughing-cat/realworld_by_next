@@ -7,7 +7,7 @@
 }
 
 .footer {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   width: 100%;
   padding: 2rem;
@@ -169,6 +169,7 @@
   display: flex;
   width: 100%;
   padding: 2rem 10rem;
+  margin-bottom: 6rem;
 }
 
 .containerArticles {
@@ -176,12 +177,12 @@
   padding: 0 1rem;
 }
 
-.containerArticles ul {
+.containerFeeds {
   margin-bottom: 0;
   padding-left: 0;
 }
 
-.containerArticles li {
+.containerFeed {
   color: #5CB85C;
   border-bottom: 2px solid #5CB85C;
   margin-bottom: -1px;
@@ -210,10 +211,18 @@
   height: 32px;
 }
 
-.userName {
+.articleUser img {
+  border-radius: 16px;
+}
+
+.articleUserName {
   display: block; 
   margin-left: 0.5rem;
   font-size: 0.8rem;
+}
+
+.userName {
+  color: #5CB85C;
 }
 
 .articleLike {
@@ -238,6 +247,21 @@
   opacity: 0.3;
 }
 
+.articleContent ul {
+  display: flex;
+  margin: 0;
+  float: right;
+}
+
+.articleContent li {
+  border-radius: 10rem;
+  border: solid #818a91;
+  font-size: 0.7rem;
+  margin-left: 3px;
+  padding: 0.1rem 0.6rem;
+  opacity: 0.3;
+}
+
 .containerTags {
   width: 25%;
   padding: 0 1rem;
@@ -253,14 +277,11 @@
   color: #fff;
   background-color: #818a91;
   font-size: 0.7rem;
-  padding-top: 0.1rem;
-  padding-bottom: 0.1rem;
+  padding: 0.1rem 0.6rem;
   white-space: nowrap;
   margin-right: 3px;
   margin-bottom: 0.2rem;
   display: inline-block;
-  padding-right: 0.6em;
-  padding-left: 0.6em;
   border-radius: 10rem;
 }
 
