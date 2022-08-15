@@ -3,8 +3,23 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "../styles/Home.module.css";
+import useSWR from "swr";
+
+const fetcher = (url: string) =>
+  fetch(url).then(async (res) => {
+    return res.json();
+  });
 
 const Home: NextPage = () => {
+  const { data, error } = useSWR("https://conduit.productionready.io/api/tags", fetcher);
+
+  if (error) return <div>An error has occurred.</div>;
+  if (!data) return <div>Loading...</div>;
+
+  const { tags } = data;
+
+  console.log("data", tags);
+
   return (
     <div className="">
       <Head>
@@ -64,9 +79,13 @@ const Home: NextPage = () => {
           <div className={styles.containerTags}>
             <div className={styles.tagsContent}>
               <p>Popular Tags</p>
-              <Link href="/">
-                <a>tags</a>
-              </Link>
+              <div>
+                {tags?.map((tag: string) => (
+                  <Link key={tag} href={`/?tag=${tag}`}>
+                    <a>{tag}</a>
+                  </Link>
+                ))}
+              </div>
             </div>
           </div>
         </div>
