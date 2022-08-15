@@ -13,12 +13,22 @@ const fetcher = (url: string) =>
 const Home: NextPage = () => {
   const { data, error } = useSWR("https://conduit.productionready.io/api/tags", fetcher);
 
+  const { data: artData, error: artError } = useSWR(
+    "https://conduit.productionready.io/api/articles",
+    fetcher
+  );
+
   if (error) return <div>An error has occurred.</div>;
   if (!data) return <div>Loading...</div>;
 
+  if (artError) return <div>An error has occurred.</div>;
+  if (!artData) return <div>Loading...</div>;
+
   const { tags } = data;
 
-  console.log("data", tags);
+  const { articles } = artData;
+
+  console.log("data", articles);
 
   return (
     <div className="">
@@ -50,6 +60,12 @@ const Home: NextPage = () => {
                 <li>Global Feed</li>
               </ul>
             </div>
+            <div>
+              {articles?.map((article) => {
+                console.log("slug", article.slug);
+              })}
+            </div>
+
             <div className={styles.articlePreview}>
               <div className={styles.articleInfo}>
                 <div className={styles.articleUser}>
