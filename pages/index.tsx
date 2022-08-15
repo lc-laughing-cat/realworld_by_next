@@ -6,7 +6,7 @@ import styles from "../styles/Home.module.css";
 
 const Home: NextPage = () => {
   return (
-    <div className={styles.container}>
+    <div className="">
       <Head>
         <title>HOME | REALWORLD BY NEXT</title>
         <meta name="description" content="realworld by next" />
@@ -28,41 +28,46 @@ const Home: NextPage = () => {
           <p className={styles.bannerSentence}>A place to share your knowledge.</p>
         </div>
 
-        <div>
-          <div>
+        <div className={styles.container}>
+          <div className={styles.containerArticles}>
             <div>
               <ul>
                 <li>Global Feed</li>
               </ul>
             </div>
             <div className={styles.articlePreview}>
-              <div>
+              <div className={styles.articleInfo}>
                 <div className={styles.articleUser}>
                   <Link href="/">
                     <a>
-                      <Image alt="" src=""></Image>
+                      <Image alt="" src="/favicon.ico" width="32pxm" height="32px"></Image>
                     </a>
                   </Link>
-                  <div>name</div>
-                  <div>date</div>
+                  <div className={styles.userName}>
+                    <div>name</div>
+                    <div>date</div>
+                  </div>
                 </div>
-                <div>いいね</div>
+                <div className={styles.articleLike}>いいね</div>
               </div>
               <div className={styles.articleContent}>
                 <Link href="/">
                   <a>
-                    <h1 className={styles.articleTitle}>Title</h1>
-                    <p>article content</p>
+                    <h3 className={styles.articleTitle}>Create a new implementation</h3>
+                    <p>join the community by creating a new implementation</p>
                     <span>Read more...</span>
                   </a>
                 </Link>
-                <Link href="/">tag</Link>
               </div>
             </div>
           </div>
-          <div className={styles.tags}>
-            <p>Popular tags</p>
-            <div>tags</div>
+          <div className={styles.containerTags}>
+            <div className={styles.tagsContent}>
+              <p>Popular Tags</p>
+              <Link href="/">
+                <a>tags</a>
+              </Link>
+            </div>
           </div>
         </div>
       </main>
