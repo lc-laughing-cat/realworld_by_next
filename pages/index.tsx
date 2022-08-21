@@ -4,19 +4,13 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "styles/Home.module.css";
 import useSWR from "swr";
-
-const fetcher = (url: string) =>
-  fetch(url).then(async (res) => {
-    return res.json();
-  });
+import { fetcher } from "lib/utils/fetcher";
+import { APP_NAME, DEFAULT_PROFILE_IMAGE, SERVER_BASE_URL } from "lib/utils/constant";
 
 const Home: NextPage = () => {
-  const { data, error } = useSWR("https://conduit.productionready.io/api/tags", fetcher);
+  const { data, error } = useSWR(`${SERVER_BASE_URL}/tags`, fetcher);
 
-  const { data: artData, error: artError } = useSWR(
-    "https://conduit.productionready.io/api/articles",
-    fetcher
-  );
+  const { data: artData, error: artError } = useSWR(`${SERVER_BASE_URL}/articles`, fetcher);
 
   if (error) return <div>An error has occurred.</div>;
   if (!data) return <div>Loading...</div>;
@@ -33,13 +27,13 @@ const Home: NextPage = () => {
       <Head>
         <title>HOME | REALWORLD BY NEXT</title>
         <meta name="description" content="realworld by next" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href={DEFAULT_PROFILE_IMAGE} />
       </Head>
 
       <main className={styles.main}>
         <div className={styles.navbar}>
           <Link href="/">
-            <a className={styles.headerTitle}>conduit</a>
+            <a className={styles.headerTitle}>{APP_NAME}</a>
           </Link>
           <div className={styles.navMenus}>
             <div className={styles.navMenu}>Home</div>
@@ -49,7 +43,7 @@ const Home: NextPage = () => {
         </div>
 
         <div className={styles.banner}>
-          <p className={styles.bannerTitle}>conduit</p>
+          <p className={styles.bannerTitle}>{APP_NAME}</p>
           <p className={styles.bannerSentence}>A place to share your knowledge.</p>
         </div>
 
@@ -70,7 +64,7 @@ const Home: NextPage = () => {
                         <a>
                           <Image
                             alt=""
-                            src={article.author.image || "/favicon.ico"}
+                            src={article.author.image || DEFAULT_PROFILE_IMAGE}
                             width="32px"
                             height="32px"
                           ></Image>
@@ -119,7 +113,7 @@ const Home: NextPage = () => {
         <footer className={styles.footer}>
           <div className={styles.footerContainer}>
             <Link href="/">
-              <a className={styles.footerTitle}>conduit</a>
+              <a className={styles.footerTitle}>{APP_NAME}</a>
             </Link>
             <span>
               An interactive learning project from

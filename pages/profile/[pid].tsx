@@ -5,17 +5,14 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import styles from "styles/Home.module.css";
 import useSWR from "swr";
-
-const fetcher = (url: string) =>
-  fetch(url).then(async (res) => {
-    return res.json();
-  });
+import { fetcher } from "lib/utils/fetcher";
+import { APP_NAME, DEFAULT_PROFILE_IMAGE, SERVER_BASE_URL } from "lib/utils/constant";
 
 const Profile: NextPage = () => {
   const router = useRouter();
   const { query } = router;
   const { pid } = query;
-  const fetchUrl = `https://conduit.productionready.io/api/articles?author=${pid}`;
+  const fetchUrl = `${SERVER_BASE_URL}/articles?author=${pid}`;
   const { data, error } = useSWR(fetchUrl, fetcher);
 
   if (error) return <div>An error has occurred.</div>;
@@ -28,13 +25,13 @@ const Profile: NextPage = () => {
       <Head>
         <title>PROFILE | REALWORLD BY NEXT</title>
         <meta name="description" content="realworld by next" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href={DEFAULT_PROFILE_IMAGE} />
       </Head>
 
       <main className={styles.main}>
         <div className={styles.navbar}>
           <Link href="/">
-            <a className={styles.headerTitle}>conduit</a>
+            <a className={styles.headerTitle}>{APP_NAME}</a>
           </Link>
           <div className={styles.navMenus}>
             <div className={styles.navMenu}>Home</div>
@@ -46,7 +43,7 @@ const Profile: NextPage = () => {
         <div className={styles.author}>
           <Image
             alt=""
-            src={articles[0].author.image || "/favicon.ico"}
+            src={articles[0].author.image || DEFAULT_PROFILE_IMAGE}
             width="100px"
             height="100px"
           ></Image>
@@ -71,7 +68,7 @@ const Profile: NextPage = () => {
                         <a>
                           <Image
                             alt=""
-                            src={article.author.image || "/favicon.ico"}
+                            src={article.author.image || DEFAULT_PROFILE_IMAGE}
                             width="32px"
                             height="32px"
                           ></Image>
@@ -108,7 +105,7 @@ const Profile: NextPage = () => {
         <footer className={styles.footer}>
           <div className={styles.footerContainer}>
             <Link href="/">
-              <a className={styles.footerTitle}>conduit</a>
+              <a className={styles.footerTitle}>{APP_NAME}</a>
             </Link>
             <span>
               An interactive learning project from
