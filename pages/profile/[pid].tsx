@@ -2,6 +2,7 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import styles from "styles/Home.module.css";
 import useSWR from "swr";
 
@@ -10,28 +11,22 @@ const fetcher = (url: string) =>
     return res.json();
   });
 
-const Home: NextPage = () => {
-  const { data, error } = useSWR("https://conduit.productionready.io/api/tags", fetcher);
-
-  const { data: artData, error: artError } = useSWR(
-    "https://conduit.productionready.io/api/articles",
-    fetcher
-  );
+const Profile: NextPage = () => {
+  const router = useRouter();
+  const { query } = router;
+  const { pid } = query;
+  const fetchUrl = `https://conduit.productionready.io/api/articles?author=${pid}`;
+  const { data, error } = useSWR(fetchUrl, fetcher);
 
   if (error) return <div>An error has occurred.</div>;
   if (!data) return <div>Loading...</div>;
 
-  if (artError) return <div>An error has occurred.</div>;
-  if (!artData) return <div>Loading...</div>;
-
-  const { tags } = data;
-
-  const { articles } = artData;
+  const { articles } = data;
 
   return (
     <div className="">
       <Head>
-        <title>HOME | REALWORLD BY NEXT</title>
+        <title>PROFILE | REALWORLD BY NEXT</title>
         <meta name="description" content="realworld by next" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -48,16 +43,22 @@ const Home: NextPage = () => {
           </div>
         </div>
 
-        <div className={styles.banner}>
-          <p className={styles.bannerTitle}>conduit</p>
-          <p className={styles.bannerSentence}>A place to share your knowledge.</p>
+        <div className={styles.author}>
+          <Image
+            alt=""
+            src={articles[0].author.image || "/favicon.ico"}
+            width="100px"
+            height="100px"
+          ></Image>
+          <p className={styles.authorName}>{articles[0].author.username}</p>
         </div>
 
         <div className={styles.container}>
-          <div className={styles.containerArticles}>
+          <div className={styles.containerArticlesForProfile}>
             <div>
               <ul className={styles.containerFeeds}>
-                <li className={styles.containerFeed}>Global Feed</li>
+                <li className={styles.containerFeed}>My Articles</li>
+                <li className={styles.containerFeed}>Favorited Articles</li>
               </ul>
             </div>
 
@@ -71,7 +72,7 @@ const Home: NextPage = () => {
                           <Image
                             alt=""
                             src={article.author.image || "/favicon.ico"}
-                            width="32pxm"
+                            width="32px"
                             height="32px"
                           ></Image>
                         </a>
@@ -103,18 +104,6 @@ const Home: NextPage = () => {
               ))}
             </div>
           </div>
-          <div className={styles.containerTags}>
-            <div className={styles.tagsContent}>
-              <p>Popular Tags</p>
-              <div>
-                {tags?.map((tag: string) => (
-                  <Link key={tag} href={`/?tag=${tag}`}>
-                    <a>{tag}</a>
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </div>
         </div>
         <footer className={styles.footer}>
           <div className={styles.footerContainer}>
@@ -135,4 +124,4 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default Profile;

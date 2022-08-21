@@ -71,7 +71,7 @@ const Home: NextPage = () => {
                           <Image
                             alt=""
                             src={article.author.image || "/favicon.ico"}
-                            width="32pxm"
+                            width="32px"
                             height="32px"
                           ></Image>
                         </a>
