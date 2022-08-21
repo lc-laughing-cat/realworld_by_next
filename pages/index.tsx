@@ -6,10 +6,10 @@ import styles from "styles/Home.module.css";
 import useSWR from "swr";
 import { fetcher } from "lib/utils/fetcher";
 import { APP_NAME, DEFAULT_PROFILE_IMAGE, SERVER_BASE_URL } from "lib/utils/constant";
+import { TagAPI } from "lib/api/tag";
 
-const Home: NextPage = () => {
-  const { data, error } = useSWR(`${SERVER_BASE_URL}/tags`, fetcher);
-
+const Home = ({ initialTags }: any) => {
+  const { data, error } = useSWR(`${SERVER_BASE_URL}/tags`, fetcher, { initialData: initialTags });
   const { data: artData, error: artError } = useSWR(`${SERVER_BASE_URL}/articles`, fetcher);
 
   if (error) return <div>An error has occurred.</div>;
@@ -130,3 +130,8 @@ const Home: NextPage = () => {
 };
 
 export default Home;
+
+export const getServerSideProps = async () => {
+  const { data } = await TagAPI.getAll();
+  return { props: { initialTags: data } };
+};
