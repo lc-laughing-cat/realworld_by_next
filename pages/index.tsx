@@ -80,7 +80,7 @@ const Home = ({ initialTags }: any) => {
                     <div className={styles.articleLike}>いいね{article.favoritesCount}</div>
                   </div>
                   <div className={styles.articleContent}>
-                    <Link href="/">
+                    <Link href="/article/[pid]" as={`/article/${article.slug}`}>
                       <a>
                         <h3 className={styles.articleTitle}>{article.title}</h3>
                         <p>{article.description}</p>
