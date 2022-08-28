@@ -8,17 +8,19 @@ import useSWR from "swr";
 import { fetcher } from "lib/utils/fetcher";
 import { APP_NAME, DEFAULT_PROFILE_IMAGE, SERVER_BASE_URL } from "lib/utils/constant";
 
-const Profile: NextPage = () => {
+const Article: NextPage = () => {
   const router = useRouter();
   const { query } = router;
   const { pid } = query;
-  const fetchUrl = `${SERVER_BASE_URL}/articles?author=${pid}`;
+  const fetchUrl = `${SERVER_BASE_URL}/articles/${pid}`;
   const { data, error } = useSWR(fetchUrl, fetcher);
 
   if (error) return <div>An error has occurred.</div>;
   if (!data) return <div>Loading...</div>;
 
-  const { articles } = data;
+  const { article } = data;
+
+  console.log("pid", pid);
 
   return (
     <div className="">
@@ -43,11 +45,11 @@ const Profile: NextPage = () => {
         <div className={styles.author}>
           <Image
             alt=""
-            src={articles[0].author.image || DEFAULT_PROFILE_IMAGE}
+            src={article.author.image || DEFAULT_PROFILE_IMAGE}
             width="100px"
             height="100px"
           ></Image>
-          <p className={styles.authorName}>{articles[0].author.username}</p>
+          <p className={styles.authorName}>{article.author.username}</p>
         </div>
 
         <div className={styles.container}>
@@ -60,45 +62,43 @@ const Profile: NextPage = () => {
             </div>
 
             <div>
-              {articles?.map((article: any) => (
-                <div key={article.slug} className={styles.articlePreview}>
-                  <div className={styles.articleInfo}>
-                    <div className={styles.articleUser}>
-                      <Link href="/profile/[pid]" as={`/profile/${article.author.username}`}>
-                        <a>
-                          <Image
-                            alt=""
-                            src={article.author.image || DEFAULT_PROFILE_IMAGE}
-                            width="32px"
-                            height="32px"
-                          ></Image>
-                        </a>
-                      </Link>
-                      <div className={styles.articleUserName}>
-                        <Link href="/profile/[pid]" as={`/profile/${article.author.username}`}>
-                          <a className={styles.userName}>{article.author.username}</a>
-                        </Link>
-                        <div>{new Date(article.updatedAt).toDateString()}</div>
-                      </div>
-                    </div>
-                    <div className={styles.articleLike}>いいね{article.favoritesCount}</div>
-                  </div>
-                  <div className={styles.articleContent}>
-                    <Link href="/article/[pid]" as={`/article/${article.slug}`}>
+              <div key={article.slug} className={styles.articlePreview}>
+                <div className={styles.articleInfo}>
+                  <div className={styles.articleUser}>
+                    <Link href="/profile/[pid]" as={`/profile/${article.author.username}`}>
                       <a>
-                        <h3 className={styles.articleTitle}>{article.title}</h3>
-                        <p>{article.description}</p>
-                        <span>Read more...</span>
-                        <ul>
-                          {article.tagList?.map((tag: string, index: number) => (
-                            <li key={index}>{tag}</li>
-                          ))}
-                        </ul>
+                        <Image
+                          alt=""
+                          src={article.author.image || DEFAULT_PROFILE_IMAGE}
+                          width="32px"
+                          height="32px"
+                        ></Image>
                       </a>
                     </Link>
+                    <div className={styles.articleUserName}>
+                      <Link href="/profile/[pid]" as={`/profile/${article.author.username}`}>
+                        <a className={styles.userName}>{article.author.username}</a>
+                      </Link>
+                      <div>{new Date(article.updatedAt).toDateString()}</div>
+                    </div>
                   </div>
+                  <div className={styles.articleLike}>いいね{article.favoritesCount}</div>
                 </div>
-              ))}
+                <div className={styles.articleContent}>
+                  <Link href="/">
+                    <a>
+                      <h3 className={styles.articleTitle}>{article.title}</h3>
+                      <p>{article.description}</p>
+                      <span>Read more...</span>
+                      <ul>
+                        {article.tagList?.map((tag: string, index: number) => (
+                          <li key={index}>{tag}</li>
+                        ))}
+                      </ul>
+                    </a>
+                  </Link>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -121,4 +121,4 @@ const Profile: NextPage = () => {
   );
 };
 
-export default Profile;
+export default Article;
